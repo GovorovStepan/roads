@@ -1,0 +1,23 @@
+mongo-data/
+mongo/
+.expo/
+front/.expo
+front/node_modules/
+back/node_modules/
+back/.env
+
+# Build files
+dist/
+build/
+out/
+*.egg-info/
+*.pyc
+
+# Editor files
+.vscode/
+*.swp
+*.swo
+
+# OS files
+Thumbs.db
+.DS_Store

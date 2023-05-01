@@ -1,0 +1,24 @@
+# Use the official Node.js image
+FROM node:latest
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Install app dependencies
+COPY ./back/package*.json ./
+RUN npm install
+
+# Bundle app source code
+COPY ./back/index.mjs ./
+COPY ./back/classes ./
+COPY ./back/nodemoon.json ./
+
+# Set environment variables
+ENV NODE_ENV=production
+ENV PORT=3000
+
+# Expose the app port
+EXPOSE 3000
+
+# Start the app
+CMD ["npm", "run", "dev"]

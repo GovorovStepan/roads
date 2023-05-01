@@ -1,0 +1,9 @@
+{
+    "watch": ["."],
+    "ext": "mjs,json",
+    "ignore": ["node_modules"],
+    "execMap": {
+      "mjs": "node --experimental-modules --es-module-specifier-resolution=node"
+    }
+  }
+  

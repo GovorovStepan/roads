@@ -1,0 +1,42 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    volumes:
+      - ./back:/app
+    ports:
+      - '3000:3000'
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/easy-roads
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./mongo:/data/db
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "19000:19000"
+      - "19001:19001"
+      - "19002:19002"
+      - "19006:19006"
+    volumes:
+      - ./front:/app
+    depends_on:
+      - backend
+    environment:
+      - NODE_ENV=development
+      - REACT_NATIVE_PACKAGER_HOSTNAME=192.255.255.255
+      - REACT_NATIVE_EXPO_DEBUG=true
+
+volumes:
+  mongo:
