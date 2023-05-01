@@ -2,16 +2,16 @@
 FROM node:latest
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Install app dependencies
 COPY ./back/package*.json ./
 RUN npm install
 
-# Bundle app source code
-COPY ./back/index.mjs ./
-COPY ./back/classes ./
-COPY ./back/nodemoon.json ./
+# # Bundle app source code
+# COPY ./back/db/ ./
+# COPY ./back/index.mjs ./
+# COPY ./back/nodemoon.json ./
 
 # Set environment variables
 ENV NODE_ENV=production
