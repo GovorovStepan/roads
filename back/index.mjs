@@ -34,30 +34,31 @@ mongoose
   );
 
 app.post('/register', async (req, res) => {
-  const { username, password } = req.body;
+  const { login, password } = req.body;
+  console.log(login, password)
 
   // Check if user already exists
-  const existingUser = await User.findOne({username});
-
+  const existingUser = await User.findOne().byLogin(login).exec();
   if (existingUser) {
     return res.status(400).json({ message: 'User already exists' });
   }
   // Hash password
   const hashedPassword = await bcrypt.hash(password, 10);
 
-   // Add new user to database
-   const newUser = new User({ username, password: hashedPassword });
-   await newUser.save();
+  // Add new user to database
+  const newUser = new User({ login, password: hashedPassword });
+  console.log(newUser)
+  await newUser.save();
 
   res.status(201).json({ message: 'User registered successfully' });
 });
 
 // Login endpoint
 app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
+  const { login, password } = req.body;
 
-  // Find user by username
-  const user = await User.findOne({ username });
+  // Find user by login
+  const user = await User.findOne({ login });
 
   // Check if user exists
   if (!user) {
@@ -72,7 +73,7 @@ app.post('/login', async (req, res) => {
   }
 
   // Generate JWT
-  const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' });
+  const token = jwt.sign({ login }, secretKey, { expiresIn: '1h' });
 
   res.status(200).json({ token });
 });
@@ -90,7 +91,7 @@ const authMiddleware = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, secretKey);
     const user = await User.findOne({
-      username: decoded.username,
+      login: decoded.login,
     });
 
     if (!user) {
@@ -106,7 +107,7 @@ const authMiddleware = async (req, res, next) => {
 
 // Protected endpoint
 app.get('/protected', authMiddleware, (req, res) => {
-  res.status(200).json({ message: `Hello, ${req.user.username}` });
+  res.status(200).json({ message: `Hello, ${req.user.login}` });
 });
 
 // Start server

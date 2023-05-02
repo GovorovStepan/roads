@@ -3,12 +3,12 @@ import { StyleSheet, View, TextInput, Text, Pressable } from 'react-native';
 import { AppContext } from '../context/AppContext';
 
 export default function Register() {
-  const [username, setUsername] = useState('');
+  const [login, setLogin] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { dispatch } = useContext(AppContext);
   async function confirmForm() {
-    console.log(username, email, password);
+    console.log(login, email, password);
     dispatch({
       type: 'TOOGLE_INDICATOR',
     });
@@ -20,7 +20,7 @@ export default function Register() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({'uesrname':username, 'password':password}),
+      body: JSON.stringify({'login':login, 'password':password}),
     });
     console.log(response.json()); // parses JSON response into native JavaScript objects
   }
@@ -31,19 +31,19 @@ export default function Register() {
       <View style={styles.container}>
         <TextInput
           style={styles.input}
-          onChangeText={setUsername}
-          value={username}
-          placeholder='username'
+          onChangeText={setLogin}
+          value={login}
+          placeholder='login'
           inputMode='text'
         />
-        <TextInput
+        {/* <TextInput
           style={styles.input}
           onChangeText={setEmail}
           value={email}
           placeholder='email'
           keyboardType='email-address'
           inputMode='email'
-        />
+        /> */}
         <TextInput
           style={styles.input}
           onChangeText={setPassword}

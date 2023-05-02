@@ -2,7 +2,7 @@ import mongoose, {Schema} from 'mongoose';
 
 const userSchema = new Schema(
   {
-    username: {
+    login: {
       type: String,
       required: true,
     },
@@ -17,13 +17,9 @@ const userSchema = new Schema(
   },
   {
     query: {
-      byUsername(username) {
-        return this.where({ username: new RegExp(username, 'i') });
+      byLogin(login) {
+        return this.where({ login: new RegExp(login, 'i') });
       }, 
-      // Example of use
-      // Animal.findOne().byName('fido').exec((err, animal) => {
-      //   console.log(animal);
-      // });
     },
     virtuals: {},
   }
