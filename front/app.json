@@ -25,7 +25,8 @@
       "package": "com.gsfp.easyroads"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "startUrl": "./App.jsx"
     },
     "extra": {
       "eas": {

@@ -7,11 +7,22 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { dispatch } = useContext(AppContext);
-  function confirmForm() {
+  async function confirmForm() {
     console.log(username, email, password);
     dispatch({
       type: 'TOOGLE_INDICATOR',
     });
+    // Default options are marked with *
+    const response = await fetch('http://localhost:3000/register', {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors, *cors, same-origin
+      credentials: "same-origin", // include, *same-origin, omit
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({'uesrname':username, 'password':password}),
+    });
+    console.log(response.json()); // parses JSON response into native JavaScript objects
   }
   return (
     <View style={styles.main}>

@@ -16,7 +16,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Secret key for JWT
-const secretKey = 'mysecretkey';
+const secretKey = process.env.JWT_SECRET;
 
 // Connect to MongoDB
 mongoose
@@ -37,7 +37,7 @@ app.post('/register', async (req, res) => {
   const { username, password } = req.body;
 
   // Check if user already exists
-  const existingUser = await User.findOne().byName(username).exec();
+  const existingUser = await User.findOne({username});
 
   if (existingUser) {
     return res.status(400).json({ message: 'User already exists' });

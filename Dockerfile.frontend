@@ -27,7 +27,7 @@ RUN npm install
 COPY ./front/pages ./pages
 COPY ./front/context ./context
 COPY ./front/components ./components
-COPY ./front/App.jsx ./
+COPY ./front/App.js ./
 
 
 CMD ["npm", "start"]
