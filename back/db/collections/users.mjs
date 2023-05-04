@@ -18,7 +18,7 @@ const userSchema = new Schema(
   {
     query: {
       byLogin(login) {
-        return this.where({ login: new RegExp(login, 'i') });
+        return this.where({ login: login });
       }, 
     },
     virtuals: {},

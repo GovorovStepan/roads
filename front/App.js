@@ -4,25 +4,26 @@ import React from 'react';
 import { AppProvider } from './context/AppContext';
 import Wrapper from './components/Wrapper';
 import { StatusBar } from 'expo-status-bar';
+import { MD3DarkTheme as DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 export default function App() {
   return (
     <AppProvider>
-      <View style={styles.container}>
-        <Wrapper>
-          <Register />
-        </Wrapper>
-        <StatusBar style='auto' />
-      </View>
+      <PaperProvider theme={DefaultTheme}>
+        <View style={styles.container}>
+          <Wrapper>
+            <Register />
+          </Wrapper>
+          <StatusBar style='auto' />
+        </View>
+      </PaperProvider>
     </AppProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#282c34',
-    justifyContent: 'center',
-  },
-  indicator: {},
+  // container: {
+  //   flex: 1,
+  //   justifyContent: 'center',
+  // },
 });

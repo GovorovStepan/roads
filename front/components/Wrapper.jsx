@@ -17,12 +17,7 @@ export default function Wrapper(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#282c34',
-    justifyContent: 'center',
-  },
-  indicator: {
-    top: '25%'
-  },
+  // indicator: {
+  //   top: '25%'
+  // },
 });
