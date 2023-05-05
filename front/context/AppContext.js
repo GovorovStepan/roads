@@ -8,6 +8,12 @@ export const AppReducer = (state, action) => {
       return {
         ...state,
       };
+    case 'SET_HEADER':
+      action.type = 'DONE';
+      state.header = action.payload;
+      return {
+        ...state,
+      };
 
     default:
       return state;
@@ -17,6 +23,7 @@ export const AppReducer = (state, action) => {
 // 1. Sets the initial state when the app loads
 const initialState = {
   indicator: false,
+  header: 'Easy-Roads'
 };
 
 // 2. Creates the context this is the thing our components import and use to get the state
@@ -32,6 +39,7 @@ export const AppProvider = (props) => {
     <AppContext.Provider
       value={{
         indicator: state.indicator,
+        header: state.header,
         dispatch,
       }}
     >
